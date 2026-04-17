@@ -5,3 +5,12 @@ dist/
 .env.*.local
 *.log
 .DS_Store
+
+# Capacitor
+ios/App/Pods
+ios/DerivedData
+ios/App/App/public
+android/.gradle
+android/app/build
+android/build
+android/app/src/main/assets/public

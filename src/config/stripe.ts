@@ -16,12 +16,12 @@
  * 空文字のままだと「準備中」モーダルが表示されます。
  */
 
-export const STRIPE_LINKS = {
+export const STRIPE_LINKS: Record<'premium_monthly' | 'premium_yearly' | 'family_monthly' | 'family_yearly', string> = {
   premium_monthly: '', // 例: 'https://buy.stripe.com/test_xxxxxxxxxxxxxxxxxx'
   premium_yearly:  '',
   family_monthly:  '',
   family_yearly:   '',
-} as const;
+};
 
 export type StripePlan = keyof typeof STRIPE_LINKS;
 
