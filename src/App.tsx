@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Shield, Bell, Lock, Database, FileText, HelpCircle } from 'lucide-react';
 import { LockScreen } from './components/LockScreen';
 import { Dashboard } from './components/Dashboard';
@@ -39,7 +39,22 @@ export default function App() {
 
 function MainApp() {
   const { status, lock } = usePinAuth();
-  const { isPremium } = usePremium();
+  const { isPremium, activate } = usePremium();
+
+  // Stripe決済成功後のリダイレクト処理
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('premium_success') === '1') {
+      const plan = params.get('plan');
+      const planType: 'premium' | 'family' = plan === 'family' ? 'family' : 'premium';
+      activate(planType).then(() => {
+        alert(`ご購入ありがとうございます！\n${planType === 'family' ? 'ファミリー' : 'プレミアム'}プランが有効になりました。`);
+        // URLを掃除
+        window.history.replaceState({}, '', window.location.pathname);
+      });
+    }
+  }, [activate]);
+
   const { theme } = useTheme(isPremium);
   const { consent, grant, deny, track } = useTracking();
   const [tab, setTab]       = useState<Tab>('dashboard');

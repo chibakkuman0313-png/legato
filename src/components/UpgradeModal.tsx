@@ -4,6 +4,7 @@ import {
   BookOpen, Palette, Infinity, BarChart3,
 } from 'lucide-react';
 import { usePremium, PLAN_LABELS, FREE_ASSET_LIMIT } from '../hooks/usePremium';
+import { getStripeUrl } from '../config/stripe';
 
 interface UpgradeModalProps {
   onClose: () => void;
@@ -26,13 +27,30 @@ const FAMILY_EXTRAS = [
   { icon: <Shield className="w-4 h-4" />, label: 'Premiumの全機能',     desc: '音声メモ・テンプレート・広告非表示すべて含む' },
 ];
 
+type Billing = 'monthly' | 'yearly';
+
 export function UpgradeModal({ onClose }: UpgradeModalProps) {
   const { startTrial, currentPlan } = usePremium();
   const [tab, setTab] = useState<PlanTab>('premium');
+  const [billing, setBilling] = useState<Billing>('monthly');
 
   async function handleTrial() {
     await startTrial(tab);
     onClose();
+  }
+
+  function handlePurchase() {
+    const key = `${tab}_${billing}` as const;
+    const url = getStripeUrl(key);
+    if (!url) {
+      alert(
+        '決済システムは準備中です（Stripe連携準備中）。\n' +
+        '30日間無料トライアルをお試しください。'
+      );
+      return;
+    }
+    // Stripe Payment Linkへ遷移。決済成功後は ?premium_success=1&plan=... で戻ってくる
+    window.location.href = url;
   }
 
   const isPremiumTab = tab === 'premium';
@@ -147,23 +165,48 @@ export function UpgradeModal({ onClose }: UpgradeModalProps) {
               : 'Premium全機能に加え、家族3人までを閲覧者として招待できます。'}
           </p>
 
+          {/* 月額/年額 切替 */}
+          <div className="flex gap-1 bg-black/20 rounded-lg p-1 mt-4 mb-3 max-w-[220px]">
+            <button
+              onClick={() => setBilling('monthly')}
+              className={`flex-1 py-1 rounded-md text-[11px] font-bold transition-all ${
+                billing === 'monthly'
+                  ? 'bg-white/15 text-white shadow'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              月額
+            </button>
+            <button
+              onClick={() => setBilling('yearly')}
+              className={`flex-1 py-1 rounded-md text-[11px] font-bold transition-all relative ${
+                billing === 'yearly'
+                  ? 'bg-white/15 text-white shadow'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              年額
+              <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 bg-green-500 text-white text-[9px] font-black rounded">17%OFF</span>
+            </button>
+          </div>
+
           {/* 価格 */}
-          <div className="flex items-end gap-2 mt-4">
+          <div className="flex items-end gap-2">
             <div>
               <span className="text-3xl font-black text-white">
-                ¥{isPremiumTab ? '400' : '600'}
+                ¥{billing === 'monthly'
+                  ? (isPremiumTab ? '400' : '600')
+                  : (isPremiumTab ? '4,000' : '6,000')}
               </span>
-              <span className="text-slate-300 text-sm ml-1">/月</span>
-            </div>
-            <div className="mb-0.5 px-2 py-0.5 bg-green-500/20 border border-green-500/40 rounded-md">
-              <span className="text-xs font-bold text-green-400">
-                年払いで17%OFF
+              <span className="text-slate-300 text-sm ml-1">
+                /{billing === 'monthly' ? '月' : '年'}
               </span>
             </div>
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            年払い ¥{isPremiumTab ? '4,000' : '6,000'}/年
-            （¥{isPremiumTab ? '333' : '500'}/月相当）
+            {billing === 'yearly'
+              ? `実質 ¥${isPremiumTab ? '333' : '500'}/月`
+              : `年払いなら ¥${isPremiumTab ? '4,000' : '6,000'}/年`}
           </p>
         </div>
 
@@ -219,9 +262,7 @@ export function UpgradeModal({ onClose }: UpgradeModalProps) {
         {/* ── CTAボタン群 ── */}
         <div className="px-5 pb-6 space-y-2.5">
           <button
-            onClick={() => {
-              alert('決済システムは準備中です。30日間無料トライアルをお試しください。');
-            }}
+            onClick={handlePurchase}
             className={`w-full font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg ${
               isPremiumTab
                 ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-900/40'

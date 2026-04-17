@@ -495,6 +495,20 @@ export function Settings() {
         {/* おすすめサービス（マルチ表示） */}
         <SponsorBanner slot="settings" multi />
 
+        {/* 公式サイトへのリンク */}
+        <a
+          href="https://legato-lp.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between p-4 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 border border-indigo-700/30 rounded-xl hover:border-indigo-500/50 transition-colors group"
+        >
+          <div>
+            <p className="text-sm font-semibold text-white">Legato 公式サイト</p>
+            <p className="text-xs text-slate-400 mt-0.5">機能紹介・プラン比較・FAQ</p>
+          </div>
+          <span className="text-indigo-400 group-hover:text-indigo-300 text-xs font-medium">開く →</span>
+        </a>
+
         {/* 法的情報 */}
         <LegalLinks />
 
