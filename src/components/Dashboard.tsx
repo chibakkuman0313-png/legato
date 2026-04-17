@@ -225,10 +225,11 @@ export function Dashboard() {
         )}
       </main>
 
-      {/* 追加ボタン（FAB） */}
+      {/* 追加ボタン（FAB） ナビバー(64px) + 余白24px = bottom-24 */}
       <button
         onClick={handleAddClick}
-        className={`fixed bottom-6 right-6 w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 ${
+        style={{ bottom: 'calc(5rem + var(--safe-bottom) + 0.75rem)' }}
+        className={`fixed right-5 w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 z-30 ${
           isAtLimit
             ? 'bg-gradient-to-br from-indigo-600 to-purple-600 shadow-purple-900/60'
             : 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-900/60'

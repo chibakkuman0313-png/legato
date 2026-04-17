@@ -66,27 +66,27 @@ function MainApp() {
 
   return (
     <div
-      className={`min-h-screen bg-slate-950 flex flex-col ${fontClass}`}
+      className={`min-h-screen bg-slate-950 flex flex-col pt-safe ${fontClass}`}
       style={fontStyle}
     >
-      {/* ヘルプボタン（FAB） */}
+      {/* ヘルプボタン（FAB） セーフエリア考慮 */}
       <button
         onClick={() => setShowGuide(true)}
-        className="fixed top-4 right-4 z-50 w-10 h-10 bg-indigo-600/80 hover:bg-indigo-500 backdrop-blur rounded-full flex items-center justify-center shadow-lg shadow-indigo-900/40 transition-all hover:scale-105"
+        className="fixed top-safe right-4 z-50 w-10 h-10 bg-indigo-600/80 hover:bg-indigo-500 backdrop-blur rounded-full flex items-center justify-center shadow-lg shadow-indigo-900/40 transition-all hover:scale-105"
         title="使い方ガイド"
       >
         <HelpCircle className="w-5 h-5 text-white" />
       </button>
 
-      <div className="flex-1 pb-20">
+      <div className="flex-1 pb-24">
         {tab === 'dashboard' && <Dashboard />}
         {tab === 'contacts'  && <TrustedContacts />}
         {tab === 'will'      && <WillNote />}
         {tab === 'settings'  && <Settings />}
       </div>
 
-      {/* ボトムナビ */}
-      <nav className="fixed bottom-0 inset-x-0 bg-slate-900/95 backdrop-blur border-t border-slate-700/60 z-40">
+      {/* ボトムナビ（セーフエリア対応） */}
+      <nav className="fixed bottom-0 inset-x-0 bg-slate-900/95 backdrop-blur border-t border-slate-700/60 z-40 pb-safe">
         <div className="max-w-6xl mx-auto flex items-stretch h-16">
           <NavItem icon={<Shield className="w-5 h-5" />}   label="資産管理"   active={tab === 'dashboard'} onClick={() => { setTab('dashboard'); track('tab_switch', { tab: 'dashboard' }); }} />
           <NavItem icon={<Bell className="w-5 h-5" />}     label="通知・共有" active={tab === 'contacts'}  onClick={() => { setTab('contacts'); track('tab_switch', { tab: 'contacts' }); }} />

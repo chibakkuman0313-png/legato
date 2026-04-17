@@ -11,7 +11,15 @@ import { TrustedContact } from '../types/asset';
 import { ShareModal } from './ShareModal';
 
 const RELATIONSHIP_OPTIONS = ['配偶者', '子', '親', '兄弟・姉妹', '親友', 'その他'];
-const TRIGGER_DAY_OPTIONS = [30, 60, 90, 180];
+const TRIGGER_DAY_PRESETS = [
+  { days: 7,   label: '1週間' },
+  { days: 14,  label: '2週間' },
+  { days: 30,  label: '1ヶ月' },
+  { days: 60,  label: '2ヶ月' },
+  { days: 90,  label: '3ヶ月' },
+  { days: 180, label: '半年' },
+  { days: 365, label: '1年' },
+];
 
 export function TrustedContacts() {
   const { contacts, switchMessage, setSwitchMessage, triggerDays, setTriggerDays, addContact, updateContact, deleteContact } = useContacts();
@@ -161,16 +169,58 @@ export function TrustedContacts() {
             <h3 className="text-sm font-semibold text-white">スイッチ発動タイミング</h3>
           </div>
           <p className="text-xs text-slate-400 mb-3">最後のログインから何日後に通知を送信しますか？</p>
-          <div className="grid grid-cols-4 gap-2">
-            {TRIGGER_DAY_OPTIONS.map(days => (
-              <button key={days} onClick={() => setTriggerDays(days)}
-                className={`py-2.5 rounded-xl text-sm font-semibold border transition-all ${
-                  triggerDays === days ? 'bg-amber-600 border-amber-500 text-white' : 'bg-slate-700/50 border-slate-600/50 text-slate-300 hover:border-slate-500'
+
+          {/* プリセットボタン */}
+          <div className="grid grid-cols-4 gap-2 mb-3">
+            {TRIGGER_DAY_PRESETS.map(p => (
+              <button key={p.days} onClick={() => setTriggerDays(p.days)}
+                className={`py-2 rounded-xl text-xs font-semibold border transition-all ${
+                  triggerDays === p.days ? 'bg-amber-600 border-amber-500 text-white' : 'bg-slate-700/50 border-slate-600/50 text-slate-300 hover:border-slate-500'
                 }`}>
-                {days}日
+                <div className="text-[10px] opacity-80">{p.label}</div>
+                <div>{p.days}日</div>
               </button>
             ))}
           </div>
+
+          {/* カスタム入力（スライダー + 数値） */}
+          <div className="bg-slate-900/40 border border-slate-700/30 rounded-lg p-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs text-slate-400">カスタム設定</label>
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="number"
+                  min="1"
+                  max="730"
+                  value={triggerDays}
+                  onChange={e => {
+                    const v = parseInt(e.target.value, 10);
+                    if (!isNaN(v) && v >= 1 && v <= 730) setTriggerDays(v);
+                  }}
+                  className="w-16 bg-slate-800 border border-slate-700 focus:border-amber-500 rounded-md px-2 py-1 text-xs text-white text-center outline-none focus:ring-2 focus:ring-amber-500/30"
+                />
+                <span className="text-xs text-slate-400">日</span>
+              </div>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="730"
+              value={triggerDays}
+              onChange={e => setTriggerDays(parseInt(e.target.value, 10))}
+              className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+            />
+            <div className="flex justify-between text-[10px] text-slate-500">
+              <span>1日</span>
+              <span>365日</span>
+              <span>730日</span>
+            </div>
+          </div>
+
+          <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+            💡 現在の設定: <span className="text-amber-400 font-semibold">{triggerDays}日間</span>
+            {' '}ログインがないと緊急連絡先へ通知されます
+          </p>
         </div>
 
         {/* 通知設定（EmailJS） */}
