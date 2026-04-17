@@ -103,7 +103,7 @@ export function LockScreen({ onUnlock }: LockScreenProps) {
         <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-indigo-900/60 mb-4">
           <Shield className="w-8 h-8 text-white" />
         </div>
-        <h1 className="text-xl font-bold text-white">LegacyVault</h1>
+        <h1 className="text-xl font-bold text-white">Legato</h1>
         <p className="text-sm text-slate-400 mt-1">
           {isSetup
             ? step === 'enter'

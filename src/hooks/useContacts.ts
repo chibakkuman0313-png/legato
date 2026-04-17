@@ -64,12 +64,12 @@ export function useContacts() {
 }
 
 function defaultMessage(): string {
-  return `このメッセージはデジタル遺産管理アプリ「LegacyVault」から自動送信されています。
+  return `このメッセージはデジタル遺産管理アプリ「Legato」から自動送信されています。
 
 しばらく本人からのアクセスが確認されなかったため、事前の設定に基づき、デジタル資産情報をお送りします。
 
 資産情報にアクセスする際は、本人から別途共有されたPINコードを使用してください。
 
 ---
-LegacyVault デッドマンズスイッチ`;
+Legato デッドマンズスイッチ`;
 }

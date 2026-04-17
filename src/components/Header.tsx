@@ -88,7 +88,7 @@ export function Header({ totalAssets, totalMonthlyCost, lastLogin }: HeaderProps
                 <Shield className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white tracking-tight">LegacyVault</h1>
+                <h1 className="text-xl font-bold text-white tracking-tight">Legato</h1>
                 <p className="text-xs text-slate-400">デジタル資産・継承管理</p>
               </div>
             </div>

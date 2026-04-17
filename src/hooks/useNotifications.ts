@@ -107,7 +107,7 @@ export function useNotifications() {
   const sendReminderToSelf = useCallback(async (daysLeft: number, triggerDays: number) => {
     // ── Push通知 ──
     sendBrowserNotification(
-      '⚠️ LegacyVault リマインダー',
+      '⚠️ Legato リマインダー',
       `あと${daysLeft}日で緊急連絡先への通知が送信されます。ログインしてタイマーをリセットしてください。`
     );
 
@@ -119,9 +119,9 @@ export function useNotifications() {
         await sendEmail({
           to_email: config.selfEmail,
           to_name:  '本人',
-          subject:  `【LegacyVault】あと${daysLeft}日で緊急連絡先へ通知されます`,
+          subject:  `【Legato】あと${daysLeft}日で緊急連絡先へ通知されます`,
           message:
-            `LegacyVaultからのリマインダーです。\n\n` +
+            `Legatoからのリマインダーです。\n\n` +
             `設定した${triggerDays}日のうち、すでに${triggerDays - daysLeft}日が経過しています。\n` +
             `あと${daysLeft}日以内にアプリにログインしない場合、登録した緊急連絡先へ自動通知が送られます。\n\n` +
             `アプリを開いてタイマーをリセットしてください。\n` +

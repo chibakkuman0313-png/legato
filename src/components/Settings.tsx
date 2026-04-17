@@ -40,7 +40,7 @@ async function generatePDF(
   doc.setFontSize(10);
   doc.setTextColor(100, 116, 139);
   doc.text(`Exported: ${today}`, 20, 30);
-  doc.text('LegacyVault - Keep this document in a safe place', 20, 36);
+  doc.text('Legato - Keep this document in a safe place', 20, 36);
 
   // ── 区切り線 ──
   doc.setDrawColor(99, 102, 241);
@@ -113,12 +113,12 @@ async function generatePDF(
     doc.setFontSize(7);
     doc.setTextColor(148, 163, 184);
     doc.text(
-      `LegacyVault | Confidential - Page ${i} of ${pageCount}`,
+      `Legato | Confidential - Page ${i} of ${pageCount}`,
       105, 290, { align: 'center' }
     );
   }
 
-  doc.save(`legacyvault-${new Date().toISOString().slice(0, 10)}.pdf`);
+  doc.save(`legato-${new Date().toISOString().slice(0, 10)}.pdf`);
 }
 
 export function Settings() {

@@ -132,7 +132,7 @@ export function UpgradeModal({ onClose }: UpgradeModalProps) {
             <span className={`text-xs font-bold tracking-widest uppercase ${
               isPremiumTab ? 'text-indigo-300' : 'text-emerald-300'
             }`}>
-              LegacyVault {isPremiumTab ? 'Premium' : 'Family'}
+              Legato {isPremiumTab ? 'Premium' : 'Family'}
             </span>
           </div>
 

@@ -114,7 +114,7 @@ export function ThemeCustomizer({ theme, isPremium, onUpdate, onUpgrade }: Theme
           style={getFontStyle(theme.fontFamily)}
         >
           <p className={`text-sm font-bold ${ACCENT_COLORS[theme.accentColor].text}`}>
-            LegacyVault
+            Legato
           </p>
           <p className="text-xs text-slate-300 mt-1">
             大切なデジタル資産を家族に引き継ぐためのアプリです。

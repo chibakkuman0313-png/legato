@@ -21,7 +21,7 @@ export function TrackingConsent({ onGrant, onDeny }: TrackingConsentProps) {
           </div>
 
           <h2 className="text-lg font-bold text-white text-center leading-tight">
-            "LegacyVault"がアクティビティの<br />トラッキングを求めています
+            "Legato"がアクティビティの<br />トラッキングを求めています
           </h2>
 
           <p className="text-sm text-slate-400 text-center mt-3 leading-relaxed">

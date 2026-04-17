@@ -66,7 +66,7 @@ const PRIVACY_SECTIONS = [
 const TERMS_SECTIONS = [
   {
     title: '第1条（適用範囲）',
-    body: `本利用規約（以下「本規約」）は、LegacyVault（以下「本アプリ」）の利用に関する条件を定めるものです。本アプリをご利用いただくことにより、本規約に同意したものとみなします。`,
+    body: `本利用規約（以下「本規約」）は、Legato（以下「本アプリ」）の利用に関する条件を定めるものです。本アプリをご利用いただくことにより、本規約に同意したものとみなします。`,
   },
   {
     title: '第2条（サービス内容）',
@@ -179,7 +179,7 @@ export function TermsOfService({ onClose }: { onClose: () => void }) {
   return (
     <LegalPage
       title="利用規約"
-      subtitle="LegacyVault ご利用条件"
+      subtitle="Legato ご利用条件"
       icon={<FileText className="w-5 h-5 text-amber-400" />}
       sections={TERMS_SECTIONS}
       onClose={onClose}

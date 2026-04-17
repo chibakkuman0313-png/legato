@@ -24,7 +24,7 @@ const SECTIONS: Section[] = [
     id: 'overview',
     icon: <Shield className="w-5 h-5" />,
     color: 'bg-indigo-600',
-    title: 'LegacyVault とは',
+    title: 'Legato とは',
     desc: 'もしもの時に備えて、デジタル資産の情報を安全に記録・共有できるアプリです。',
     steps: [
       { text: '銀行口座・サブスク・SNSなどの情報を一元管理' },
@@ -194,7 +194,7 @@ export function HelpGuide({ onClose }: { onClose: () => void }) {
         </button>
         <div>
           <h1 className="text-lg font-bold text-white">使い方ガイド</h1>
-          <p className="text-xs text-slate-400">LegacyVault の全機能をわかりやすく解説</p>
+          <p className="text-xs text-slate-400">Legato の全機能をわかりやすく解説</p>
         </div>
       </header>
 
@@ -285,7 +285,7 @@ export function HelpGuide({ onClose }: { onClose: () => void }) {
 
         {/* フッター */}
         <div className="text-center pt-4 pb-8 space-y-2">
-          <p className="text-xs text-slate-500">LegacyVault v0.1.0</p>
+          <p className="text-xs text-slate-500">Legato v0.1.0</p>
           <p className="text-[11px] text-slate-600 leading-relaxed">
             ご不明な点があればお気軽にお問い合わせください。
           </p>

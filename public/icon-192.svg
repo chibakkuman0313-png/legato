@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338ca"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="192" height="192" rx="36" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M96 28 L152 50 L152 104 C152 138 128 164 96 174 C64 164 40 138 40 104 L40 50 Z" fill="url(#shield)" opacity="0.95"/>
+  <!-- L letter inside shield -->
+  <text x="96" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="bold" fill="#4338ca" text-anchor="middle">L</text>
+</svg>
