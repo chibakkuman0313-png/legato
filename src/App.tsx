@@ -7,11 +7,14 @@ import { Settings } from './components/Settings';
 import { WillNote } from './components/WillNote';
 import { ViewerPage } from './components/ViewerPage';
 import { HelpGuide } from './components/HelpGuide';
+import { OnboardingScreen } from './components/OnboardingScreen';
 import { usePinAuth } from './hooks/usePinAuth';
 import { usePremium } from './hooks/usePremium';
 import { useTheme, FONT_FAMILIES, getFontStyle } from './hooks/useTheme';
 import { useTracking } from './hooks/useTracking';
 import { TrackingConsent } from './components/TrackingConsent';
+
+const ONBOARDING_KEY = 'dlv_onboarding_seen';
 
 type Tab = 'dashboard' | 'contacts' | 'will' | 'settings';
 
@@ -42,6 +45,21 @@ function MainApp() {
   const [tab, setTab]       = useState<Tab>('dashboard');
   const [unlocked, setUnlocked] = useState(status === 'unlocked');
   const [showGuide, setShowGuide] = useState(false);
+  const [onboardingDone, setOnboardingDone] = useState(
+    () => localStorage.getItem(ONBOARDING_KEY) === '1' || status !== 'unset'
+  );
+
+  // ── 初回起動時のオンボーディング（PIN設定前に表示） ──
+  if (!onboardingDone) {
+    return (
+      <OnboardingScreen
+        onComplete={() => {
+          localStorage.setItem(ONBOARDING_KEY, '1');
+          setOnboardingDone(true);
+        }}
+      />
+    );
+  }
 
   if (!unlocked) {
     return <LockScreen onUnlock={() => setUnlocked(true)} />;
